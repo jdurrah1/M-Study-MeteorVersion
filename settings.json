@@ -1,0 +1,9 @@
+{
+  "galaxy.meteor.com": {
+     "env": {
+     	"ROOT_URL": "http://m-study1.meteorapp.com", 
+       "MONGO_URL": "mongodb://m-study-user:Family12@ds137760.mlab.com:37760/m-study"
+     }
+   }
+}
+

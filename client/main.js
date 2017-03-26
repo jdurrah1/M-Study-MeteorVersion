@@ -84,7 +84,7 @@ Template.clipboard.events({
 
 Template.savedTextList.helpers({
   savedTextValues() {
-  	return SavedText.find({}, { sort: { createdAt: -1 } });
+  	return SavedText.find({owner: Meteor.userId()}, { sort: { createdAt: -1 } });
   },
 });
 
@@ -93,11 +93,12 @@ Template.updatedSpeechToTextControls.events({
     // Prevent default browser form submit
     var textarea_text = $(".textarea").val()
 
- 
     // Insert a task into the collection
     SavedText.insert({
       text:textarea_text,
       createdAt: new Date(), // current time
+      owner: Meteor.userId(),
+      username: Meteor.user().username,
     });
   },
 });

@@ -57,8 +57,8 @@
         <li><a href="http://www.zamzar.com/">File Conversations</a></li>
         <li><a href="#">Saved Files</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+      <ul class="nav navbar-nav ">
+        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> {{> loginButtons}}</a></li>
       </ul>
     </div>
   </div>
@@ -71,7 +71,11 @@
     </div>
     <div class="col-sm-3 sidenav" style="overflow-y: scroll;">
       <h3>Saved Text</h3>
-      {{>savedTextList}}
+      {{#if currentUser}}
+        {{>savedTextList}}
+      {{else}}
+      <h4>Please sign-in to view saved Text</h4>
+      {{/if}}
     </div>
   </div>
 </div>
@@ -143,7 +147,9 @@
 
     <ul style="list-style: none;">
       {{#each savedTextValues}}
-        {{> savedTextValue}}
+        
+          {{> savedTextValue}}
+     
       {{/each}}
     </ul>
 
@@ -151,9 +157,7 @@
 
   <template name="savedTextValue">
   <li>
-    <div class="well"><p id="ish">{{text}}</p><button class="delete">&times;</button> </div> 
-
-    
+    <div class="well"><p class="savedTextP">{{text}}</p><button class="delete">&times;</button> </div> 
   </li>
 </template>
 

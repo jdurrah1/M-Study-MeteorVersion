@@ -5,93 +5,53 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
-    .navbar {
-      margin-bottom: 0;
-      border-radius: 0;
-    }
-    
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {height: 450px}
-    
-    /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 20px;
-      background-color: #f1f1f1;
-      height: 100%;
-    }
-    
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-  </style>
 </head>
 
 <body>
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" href="#">M-Study</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Speech to Text</a></li>
-        <li><a href="http://www.zamzar.com/">File Conversations</a></li>
-        <li><a href="#">Saved Files</a></li>
-      </ul>
-      <ul class="nav navbar-nav ">
-        <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> {{> loginButtons}}</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-  
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-9 text-left"> 
-      {{>clipboard}}
-    </div>
-    <div class="col-sm-3 sidenav" style="overflow-y: scroll;">
-      <h3>Saved Text</h3>
-      {{#if currentUser}}
-        {{>savedTextList}}
-      {{else}}
-      <h4>Please sign-in to view saved Text</h4>
-      {{/if}}
-    </div>
-  </div>
-</div>
-
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer>
-
+  <button class="btn transcribe-button">push me</button>
 </body>
 
-
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="mainContent">
+    <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>                        
+        </button>
+        <a class="navbar-brand" href="#">M-Study</a>
+      </div>
+      <div class="collapse navbar-collapse" id="myNavbar">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Speech to Text</a></li>
+          <li><a href="http://www.zamzar.com/">File Conversations</a></li>
+          <li><a href="#">Saved Files</a></li>
+        </ul>
+        <ul class="nav navbar-nav ">
+          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> {{> loginButtons}}</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+    
+  <div class="container-fluid text-center">    
+    <div class="row content">
+      <div class="col-sm-9 text-left"> 
+        {{>clipboard}}
+      </div>
+      <div class="col-sm-3 sidenav" style="overflow-y: scroll;">
+        <h3>Saved Text</h3>
+        {{#if currentUser}}
+          {{>savedTextList}}
+        {{else}}
+        <h4>Please sign-in to view saved Text</h4>
+        {{/if}}
+      </div>
+    </div>
+  </div>
 </template>
+
 
 
 <template name="clipboard">
@@ -99,7 +59,6 @@
     <div class="input-group">
       <textarea class="form-control textarea" rows="10" cols="50" id="clipBoard"
       name="text"></textarea>
-
       {{>updatedSpeechToTextControls}}
     </div>
   </template>
@@ -107,59 +66,38 @@
 
 
   <template name="updatedSpeechToTextControls">
-    <div class="controls">
-      <button type="button" class="btn js-textareasavebtn">Save</button>
-      <button type="button" class="btn js-textareacutbtn">Cut</button>
-      <button type="button" class="btn js-textareacopybtn">Copy</button>
-      <button type="button" class="btn js-textareapastebtn">Past</button>
-      <button type="button" class="btn js-textareaclearbtn">Clear</button>
-    </div>
-    <br>
+      <div class="controls">
+        <button type="button" class="btn js-textareasavebtn">Save</button>
+        <button type="button" class="btn js-textareacutbtn">Cut</button>
+        <button type="button" class="btn js-textareacopybtn">Copy</button>
+        <button type="button" class="btn js-textareapastebtn">Past</button>
+        <button type="button" class="btn js-textareaclearbtn">Clear</button>
+      </div>
+      <br>
 
-    <div id="controls">
-       <button id="record" class="btn btn-danger" onclick="toggleRecording(this);" name="image" >Record</button>
+      <div id="controls">
+         <button id="record" class="btn btn-danger" onclick="toggleRecording(this);" name="image" >Record</button>
 
-       <a  style="display:none" id="download_recording" ><button class="btn" >Download </button> </a>
-    </div>
+         <a  style="display:none" id="download_recording" ><button class="btn" >Download </button> </a>
+      </div>
 
-    <script src = "../static/js/record.js"></script>
-    <script src="../static/js/Recorderjs-master/dist/recorder.js"></script>
-  </template>
-
-  <template name="speechToTextControls">
-        <p>
-      <input type="image" src="../static/images/border_save.png" name="image" width="60" height="60">
-      <input type="image" src="../static/images/cut.png" name="image" width="60" height="60" class="btn btn-primary js-textareacutbtn">
-      <input type="image" src="../static/images/copy.png" name="image" width="60" height="60" class="btn btn-primary js-textareacopybtn">
-      <input type="image" src="../static/images/paste.png" name="image" width="60" height="60" class="btn btn-primary js-textareapastebtn">
-    </p>
-
-    <div id="controls">
-       <input id="record" onclick="toggleRecording(this);" type="image" src="../static/images/record_voice.png" name="image" >
-       <a id="download_recording">Download</a>
-    </div>
-
-  <script src = "../static/js/record.js"></script>
-   <script src="../static/js/Recorderjs-master/dist/recorder.js"></script>
+      <script src = "../static/js/record.js"></script>
+      <script src="../static/js/Recorderjs-master/dist/recorder.js"></script>
   </template>
 
   <template name="savedTextList">
-
     <ul style="list-style: none;">
-      {{#each savedTextValues}}
-        
+      {{#each savedTextValues}}    
           {{> savedTextValue}}
-     
       {{/each}}
     </ul>
-
   </template>
 
   <template name="savedTextValue">
-  <li>
-    <div class="well"><p class="savedTextP">{{text}}</p><button class="delete">&times;</button> </div> 
-  </li>
-</template>
+    <li>
+      <div class="well"><p class="savedTextP">{{text}}</p><button class="delete">&times;</button> </div> 
+    </li>
+  </template>
 
 
 

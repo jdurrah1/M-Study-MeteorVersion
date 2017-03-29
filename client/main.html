@@ -1,5 +1,3 @@
-
-
 <!--<button class="btn transcribe-button">push me</button>-->
 
 <body>
@@ -74,16 +72,18 @@
 
   <template name="updatedSpeechToTextControls">
       <div class="controls">
-        <button type="button" class="btn js-textareasavebtn">Save</button>
-        <button type="button" class="btn js-textareacutbtn">Cut</button>
-        <button type="button" class="btn js-textareacopybtn">Copy</button>
-        <button type="button" class="btn js-textareapastebtn">Paste</button>
-        <button type="button" class="btn js-textareaclearbtn">Clear</button>
+        <button type="button" class="btn js-textareasavebtn">SAVE TO LIST</button>
+        <button type="button" class="btn js-textareadownloadtxtbtn">DOWNLOAD AS .TXT</button>
+        <button type="button" class="btn js-textareadownloaddocbtn">DOWNLOAD AS .DOC</button>
+        <button type="button" class="btn js-textareacutbtn">CUT</button>
+        <button type="button" class="btn js-textareacopybtn">COPY</button>
+        <button type="button" class="btn js-textareapastebtn">PASTE</button>
+        <button type="button" class="btn js-textareaclearbtn">CLEAR CLIPBOARD</button>
       </div>
       <br>
 
       <div id="controls">
-         <button id="record" class="btn btn-danger" onclick="toggleRecording(this);" name="image" >Record</button>
+         <button id="record" class="btn btn-danger" onclick="toggleRecording(this);" name="image">Record</button>
 
          <a  style="display:none" id="download_recording" ><button class="btn" >Download </button> </a>
       </div>

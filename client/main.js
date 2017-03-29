@@ -31,7 +31,30 @@ Template.body.events({
 });
 
 
+
 Template.clipboard.events({
+	'click .js-textareadownloadtxtbtn'(event){
+		console.log('now trying to download as .txt');
+		console.log('grabbing clipboard contents');
+		var elHtml = $(".textarea").val()
+		var filename = elHtml.substring(0,16);+'.txt';
+		var link = document.createElement('a');
+		mimeType = 'text/plain';
+		link.setAttribute('download', filename);
+		link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+		link.click(); 
+	},
+	'click .js-textareadownloaddocbtn'(event){
+		console.log('now trying to download as .doc');
+		console.log('grabbing clipboard contents');
+		var elHtml = $(".textarea").val()
+		var filename = elHtml.substring(0,16);+'.doc';
+		var link = document.createElement('a');
+		mimeType = 'application/msword';
+		link.setAttribute('download', filename);
+		link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
+		link.click(); 
+	},
 	'click .js-textareacutbtn'(event){
 		var cut_text = document.querySelector('textarea');
 		cut_text.select();

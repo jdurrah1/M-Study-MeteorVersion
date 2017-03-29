@@ -19,7 +19,6 @@ Meteor.methods({getAudio: function () {
 		console.log(name);
 		return name; 
 		}}
-
 );
 
 

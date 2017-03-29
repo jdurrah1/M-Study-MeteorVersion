@@ -72,13 +72,21 @@
 
   <template name="updatedSpeechToTextControls">
       <div class="controls">
-        <button type="button" class="btn js-textareasavebtn">SAVE TO LIST</button>
-        <button type="button" class="btn js-textareadownloadtxtbtn">DOWNLOAD AS .TXT</button>
-        <button type="button" class="btn js-textareadownloaddocbtn">DOWNLOAD AS .DOC</button>
-        <button type="button" class="btn js-textareacutbtn">CUT</button>
-        <button type="button" class="btn js-textareacopybtn">COPY</button>
-        <button type="button" class="btn js-textareapastebtn">PASTE</button>
-        <button type="button" class="btn js-textareaclearbtn">CLEAR CLIPBOARD</button>
+        <p>
+	  <button type="button" class="btn js-textareasavebtn">SAVE TO LIST</button>
+          <button type="button" class="btn js-textareadownloadtxtbtn">DOWNLOAD AS .TXT</button>
+          <button type="button" class="btn js-textareadownloaddocbtn">DOWNLOAD AS .DOC</button>
+	</p>
+	<p>
+	  <input type="file" id="uploadtxt">
+	  <button type="button" class="btn js-textareauploadtxtbtn">UPLOAD A .TXT</button>
+	</p>
+        <p>
+	  <button type="button" class="btn js-textareacutbtn">CUT</button>
+          <button type="button" class="btn js-textareacopybtn">COPY</button>
+          <button type="button" class="btn js-textareapastebtn">PASTE</button>
+          <button type="button" class="btn js-textareaclearbtn">CLEAR CLIPBOARD</button>
+	</p>
       </div>
       <br>
 

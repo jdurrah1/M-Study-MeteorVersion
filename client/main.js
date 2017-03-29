@@ -55,6 +55,38 @@ Template.clipboard.events({
 		link.setAttribute('href', 'data:' + mimeType + ';charset=utf-8,' + encodeURIComponent(elHtml));
 		link.click(); 
 	},
+	'click .js-textareauploadtxtbtn'(event){
+		function processFile(e)
+		{
+   			var file = e.target.result,
+        		results;
+    			if (file && file.length)
+			{
+        			//results = file.split("\n");
+				results = file;
+        			console.log(results)
+        			$('.textarea').val(results);
+    			}
+		}
+		console.log('now trying to upload text and put into clipboard');
+		if (!window.FileReader)
+		{
+        		alert('Your browser is not supported')
+    		}
+		var fileInput = $('#uploadtxt');
+    		var input = fileInput.get(0);
+    		var reader = new FileReader();
+    		if (input.files.length)
+		{
+        		var textFile = input.files[0];
+        		reader.readAsText(textFile);
+        		$(reader).on('load', processFile);
+    		}
+		else
+		{
+        		alert('Please upload a file before continuing')
+    		}
+	},
 	'click .js-textareacutbtn'(event){
 		var cut_text = document.querySelector('textarea');
 		cut_text.select();

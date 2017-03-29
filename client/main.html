@@ -7,8 +7,10 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
+<!--<button class="btn transcribe-button">push me</button>-->
+
 <body>
-  <button class="btn transcribe-button">push me</button>
+{{> mainContent}}
 </body>
 
 <template name="mainContent">
@@ -98,6 +100,3 @@
       <div class="well"><p class="savedTextP">{{text}}</p><button class="delete">&times;</button> </div> 
     </li>
   </template>
-
-
-

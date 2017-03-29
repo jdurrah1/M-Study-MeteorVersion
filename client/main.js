@@ -11,7 +11,7 @@ SavedText = new Mongo.Collection('SavedText');
 
 
 Template.body.events({
-	'click .btn'(){
+	'click .btnSpeechToText'(){
 
 
 

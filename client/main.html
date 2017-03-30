@@ -1,6 +1,7 @@
-
+<!--<button class="btn transcribe-button">push me</button>-->
 
 <body>
+
   {{> mainContent }}
 
 </body>
@@ -29,7 +30,7 @@
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
           <li class="active"><a href="#">Speech to Text</a></li>
-          <li><a href="http://www.zamzar.com/">File Conversations</a></li>
+          <li><a href="http://www.zamzar.com/">File Conversions</a></li>
           <li><a href="#">Saved Files</a></li>
         </ul>
         <ul class="nav navbar-nav ">
@@ -75,9 +76,13 @@
         <button type="button" class="btn js-textareacopybtn">Copy</button>
         <button type="button" class="btn js-textareapastebtn">Paste</button>
         <button type="button" class="btn js-textareaclearbtn">Clear</button>
+        <button type="button" class="btn js-textareadownloadtxtbtn">DOWNLOAD AS .TXT</button>
+        <button type="button" class="btn js-textareadownloaddocbtn">DOWNLOAD AS .DOC</button>
+	      <input type="file" id="uploadtxt">
+	      <button type="button" class="btn js-textareauploadtxtbtn">UPLOAD A .TXT</button>
       </div>
       <div id="controls">
-         <button id="record" class="btn btn-danger" onclick="toggleRecording(this);" name="image" >Record</button>
+         <button id="record" class="btn btn-danger" onclick="toggleRecording(this);" name="image">Record</button>
 
          <a  style="display:none" id="download_recording" ><button class="btn" >Download </button> </a>
       </div>
@@ -99,23 +104,3 @@
       <div class="well"><p class="savedTextP">{{text}}</p><button class="delete">&times;</button> </div> 
     </li>
   </template>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

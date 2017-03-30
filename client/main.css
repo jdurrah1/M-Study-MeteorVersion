@@ -47,7 +47,7 @@ h2 {
   border: 3px solid gray;
   border-radius: 25px;
   padding: 13px;
-  background-color: #e6eeff;
+  background-color: #add8e6;
 }
 
 .input-group {
@@ -56,9 +56,42 @@ h2 {
   padding: 10px;
 }
 
-.btn {
-  font-size: 30px !important;
+.btn-standard {
+  font-size: 25px !important;
   margin-top: 15px !important;
   margin-right: 5px !important;
+  border-radius: 15px !important;
 }
 
+p {
+  font-size: 25px;
+}
+
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  background-color: #add8e6;
+  padding: 10px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: gray;
+}
+
+h3 {
+  margin-top: 5px !important;
+  padding: 13px !important;
+  background-color: #f5deb3;
+  border-radius: 25px;
+  border: 3px solid gray; 
+}

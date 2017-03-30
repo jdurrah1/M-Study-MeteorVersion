@@ -41,10 +41,10 @@
     
   <div class="container-fluid text-center">    
     <div class="row content">
-      <div class="col-sm-9 text-left"> 
+      <div class="col-sm-8 text-center"> 
         {{>clipboard}}
       </div>
-      <div class="col-sm-3 sidenav" style="overflow-y: scroll;">
+      <div class="col-sm-4 sidenav" style="overflow-y: scroll;">
         <h3>Saved Text</h3>
         {{#if currentUser}}
           {{>savedTextList}}
@@ -59,10 +59,9 @@
 
 
 <template name="clipboard">
-  <h2>CLIPBOARD</h2>
+  <h2><strong>Clipboard</strong></h2>
     <div class="input-group">
-      <textarea class="form-control textarea" rows="10" cols="50" id="clipBoard"
-      name="text"></textarea>
+      <textarea class="form-control textarea" rows="10" cols="100" id="clipBoard" name="text" align="middle"></textarea>
       {{>updatedSpeechToTextControls}}
     </div>
   </template>
@@ -74,11 +73,9 @@
         <button type="button" class="btn js-textareasavebtn">Save</button>
         <button type="button" class="btn js-textareacutbtn">Cut</button>
         <button type="button" class="btn js-textareacopybtn">Copy</button>
-        <button type="button" class="btn js-textareapastebtn">Past</button>
+        <button type="button" class="btn js-textareapastebtn">Paste</button>
         <button type="button" class="btn js-textareaclearbtn">Clear</button>
       </div>
-      <br>
-
       <div id="controls">
          <button id="record" class="btn btn-danger" onclick="toggleRecording(this);" name="image" >Record</button>
 

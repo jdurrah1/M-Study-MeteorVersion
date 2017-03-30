@@ -1,6 +1,6 @@
 .well{
     white-space: nowrap; 
-    width: 18em; 
+    width: 100%; 
     overflow: hidden;
     text-overflow: ellipsis; 
     text-align: left;

@@ -89,7 +89,7 @@
         <!-- Upload Button -->
         <p>
         <input type="file" name="file" id="file" class="inputfile">
-        <label for="file" type="button">Select Text File</label>
+        <label for="file">Select Text File</label>
 	      <button type="button" class="btn-standard js-textareauploadtxtbtn">Upload</button></p>
 
       <script src = "../static/js/record.js"></script>
@@ -106,6 +106,6 @@
 
   <template name="savedTextValue">
     <li>
-      <div class="well"><p class="savedTextP">{{text}}</p><button class="delete">&times;</button> </div> 
+      <div class="well"><button class="delete">&times;</button>{{text}}</div>
     </li>
   </template>

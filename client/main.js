@@ -71,7 +71,7 @@ Template.clipboard.events({
 		console.log('now trying to upload text and put into clipboard');
 		if (!window.FileReader)
 		{
-        		alert('Your browser is not supported')
+        		alert('Your browser is not supported');
     		}
 		var fileInput = $('#uploadtxt');
     		var input = fileInput.get(0);

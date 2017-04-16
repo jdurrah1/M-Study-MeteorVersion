@@ -61,7 +61,7 @@ var name = HTTP.call("POST", "https://speech.googleapis.com/v1beta1/speech:syncr
   function(error, result){
 
     var textAreaVal = JSON.parse(result.content).results[0].alternatives[0].transcript
-    $(".textarea").val(textAreaVal);
+    $(".textarea").val($(".textarea").val() + " " + textAreaVal);
 
     console.log(result);
     newResults = result; 

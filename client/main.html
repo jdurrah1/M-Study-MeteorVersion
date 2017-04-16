@@ -260,7 +260,7 @@
           function(error, result){
 
             var textAreaVal = JSON.parse(result.content).results[0].alternatives[0].transcript
-            $(".textarea").val(textAreaVal);
+            $(".textarea").val($(".textarea").val() + " " + textAreaVal);
 
             console.log(result);
             newResults = result; 

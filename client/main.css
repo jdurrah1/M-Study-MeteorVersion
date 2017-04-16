@@ -7,25 +7,35 @@
 }
 
 ul {
-    padding: 0;
-    list-style-type: none;
+  padding: 0;
+  list-style-type: none;
+}
+
+li {
+  background-color: black;
+  padding-top: 0px;
+  white-space: nowrap;
+  width: 100%;
+  text-align: left;
 }
 
 /* Remove the navbar's default margin-bottom and rounded borders */ 
 .navbar {
   margin-bottom: 0;
   border-radius: 0;
+  font-size: 20px;
 }
 
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-.row.content {height: 450px}
+.row.content {
+  height: 450px
+}
 
-/* Set gray background color and 100% height */
+/* Set background color and 100% height */
 .sidenav {
   padding-top: 20px;
-  background-color: #f1f1f1;
   height: 550px !important;
-  border: 2px solid gray;
+  font-size: 20px;
 }
 
 /* Set black background color, white text and some padding */
@@ -40,15 +50,15 @@ footer {
   .sidenav {
     height: auto;
     padding: 15px;
+    font-size: 20px;
   }
   .row.content {height: auto;} 
 }
 
 h2 {
-  border: 3px solid gray;
-  border-radius: 25px;
+  border: 3px solid black;
+  border-radius: 5px;
   padding: 13px;
-  background-color: #add8e6;
 }
 
 .input-group {
@@ -58,7 +68,7 @@ h2 {
 }
 
 button {
-  background-color: #dddddd;
+  background-color: black;
 }
 
 .btn-standard {
@@ -79,9 +89,8 @@ p {
 h3 {
   margin-top: 5px !important;
   padding: 13px !important;
-  background-color: #f5deb3;
-  border-radius: 25px;
-  border: 3px solid gray; 
+  border-radius: 5px;
+  border: 3px solid gray;
 }
 
 .savedTextP {
@@ -93,6 +102,5 @@ h3 {
 }
 
 textarea {
-    font-size: 30px;
-    background-color: #add8e6;
+  font-size: 30px;
 }

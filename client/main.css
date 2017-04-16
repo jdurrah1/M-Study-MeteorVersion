@@ -17,6 +17,7 @@ li {
   white-space: nowrap;
   width: 100%;
   text-align: left;
+  font-family: "Lucida Console";
 }
 
 /* Remove the navbar's default margin-bottom and rounded borders */ 
@@ -80,6 +81,7 @@ button {
 
 p {
   font-size: 25px;
+  font-family: "Lucida Console";
 }
 
 .inputfile {
@@ -103,4 +105,5 @@ h3 {
 
 textarea {
   font-size: 30px;
+  font-family: "Lucida Console";
 }

@@ -33,6 +33,91 @@ function toggleRecording(button) {
 	}
 }
 
+function blobToBase64(blob) {
+var reader = new FileReader();
+reader.onload = function() {
+  var dataUrl = reader.result;
+  var base64 = dataUrl.split(',')[1];
+  sendpost(base64);
+};
+reader.readAsDataURL(blob);
+};
+
+function sendpost(base64)
+{
+
+console.log("sending post");
+var name = HTTP.call("POST", "https://speech.googleapis.com/v1beta1/speech:syncrecognize?key=AIzaSyAO2eO6JVR93eNL1WYpr040o7kFQ59XPbM",
+  {data: {
+    "config": {
+        "encoding":"FLAC",
+        "language_code": "en-US",
+        "sampleRate": 44100
+    },
+    "audio": {
+        "content":base64
+    }
+  }}, 
+  function(error, result){
+
+    var textAreaVal = JSON.parse(result.content).results[0].alternatives[0].transcript
+    $(".textarea").val(textAreaVal);
+
+    console.log(result);
+    newResults = result; 
+  }
+  );
+return name; 
+}
+
+
+function convertToFlac(blob){
+	console.log("convertToFlac");
+	worker = new Worker('../../flac.js/worker/EmsWorkerProxy.js');
+	worker.onmessage = function(e) {
+		if (e.data && e.data.reply === 'done') {
+              console.log(e.data.values["encoded.flac"].blob);
+              blobToBase64(e.data.values["encoded.flac"].blob);
+          }
+	}
+
+	fr = new FileReader();
+
+	fr.addEventListener('loadend', function() {
+		console.log("filreader loaded")
+
+		var encodedName = "encoded.flac"
+		var args = [
+		            // Input file *name*
+		            "encoded.wav"
+		          ];
+
+       	var inData = {};
+          // Remember: We set f.name as input file name
+        inData["encoded.wav"] = new Uint8Array(fr.result);
+
+		// Meta-information about the files
+          // that are being created during encoding
+          // Currently MIME type only
+          var outData = {};
+          outData[encodedName] = {
+            // Its MIME type
+            'MIME': 'audio/flac'
+          };
+
+           worker.postMessage({
+            command: 'encode',
+            args: args,
+            outData: outData,
+            fileData: inData
+          });         
+
+	});
+
+	fr.readAsArrayBuffer(blob);
+
+}
+
 function createDownload() {
 	recorder && recorder.exportWAV(function(blob) {
 		var url = URL.createObjectURL(blob);
@@ -40,6 +125,9 @@ function createDownload() {
 		dwn.href = url;
 		dwn.download = new Date().toISOString() + '.wav';
 		$("#download_recording").show();
+
+		convertToFlac(blob);
+
 	});
 }
 

@@ -9,6 +9,52 @@ import './main.html';
 SavedText = new Mongo.Collection('SavedText');
 
 
+document.addEventListener("DOMContentLoaded", function() {
+  ui_change();
+});
+
+function ui_change()
+{
+  document.body.style.backgroundColor = document.getElementById('color_page_bg').value;
+  document.body.style.color = document.getElementById('color_page_text').value;
+  for (var i=0; i<document.getElementsByTagName("h2").length; i+=1)
+  {
+    document.getElementsByTagName("h2")[i].style.backgroundColor = document.getElementById('color_page_bg').value;
+    document.getElementsByTagName("h2")[i].style.color = document.getElementById('color_page_text').value;
+    document.getElementsByTagName("h2")[i].style.border =
+      "3px solid "+document.getElementById('color_page_text').value;
+  }
+  for (var i=0; i<document.getElementsByTagName("h3").length; i+=1)
+  {
+    document.getElementsByTagName("h3")[i].style.backgroundColor = document.getElementById('color_docs_bg').value;
+    document.getElementsByTagName("h3")[i].style.color = document.getElementById('color_docs_text').value;
+    document.getElementsByTagName("h3")[i].style.border =
+      "3px solid "+document.getElementById('color_docs_text').value;
+  }
+  for (var i=0; i<document.getElementsByTagName("li").length; i+=1)
+  {
+    document.getElementsByTagName("li")[i].style.backgroundColor = document.getElementById('color_page_bg').value;
+    document.getElementsByTagName("li")[i].style.color = document.getElementById('color_docs_text').value;
+  }
+  document.getElementById("clipBoard").style.backgroundColor = document.getElementById('color_clip_bg').value;
+  document.getElementById("clipBoard").style.color = document.getElementById('color_clip_text').value;
+  document.getElementById("sidenav").style.backgroundColor = document.getElementById('color_docs_bg').value;
+  document.getElementById("sidenav").style.color = document.getElementById('color_docs_text').value;
+  for (var i=0; i<document.getElementsByTagName("button").length; i+=1)
+  {
+    if (document.getElementsByTagName("button")[i].innerHTML === "&lt;&lt;")
+    {
+      document.getElementsByTagName("button")[i].style.backgroundColor = document.getElementById('color_clip_bg').value;
+      document.getElementsByTagName("button")[i].style.color = document.getElementById('color_clip_text').value;
+    }
+    else
+    {
+      document.getElementsByTagName("button")[i].style.backgroundColor = document.getElementById('color_btn_bg').value;
+      document.getElementsByTagName("button")[i].style.color = document.getElementById('color_btn_text').value;
+    }
+  }
+}
+
 
 Template.body.events({
 	'click .btnSpeechToText'(){
@@ -36,8 +82,8 @@ Template.clipboard.events({
 	'click .js-textareadownloadtxtbtn'(event){
 		console.log('now trying to download as .txt');
 		console.log('grabbing clipboard contents');
-		var elHtml = $(".textarea").val()
-		var filename = elHtml.substring(0,16);+'.txt';
+		var elHtml = $(".textarea").val();
+		var filename = elHtml.substring(0,16)+'.txt';
 		var link = document.createElement('a');
 		mimeType = 'text/plain';
 		link.setAttribute('download', filename);
@@ -47,8 +93,8 @@ Template.clipboard.events({
 	'click .js-textareadownloaddocbtn'(event){
 		console.log('now trying to download as .doc');
 		console.log('grabbing clipboard contents');
-		var elHtml = $(".textarea").val()
-		var filename = elHtml.substring(0,16);+'.doc';
+		var elHtml = $(".textarea").val();
+		var filename = elHtml.substring(0,16)+'.doc';
 		var link = document.createElement('a');
 		mimeType = 'application/msword';
 		link.setAttribute('download', filename);
@@ -96,7 +142,7 @@ Template.clipboard.events({
 			var message = 'successful';
 			if (!successful)
 				message = 'unsucessful';
-			console.log('Cutting clipboard text was '+message);
+			console.log('main.js ~ Cutting clipboard text was '+message);
 		}
 		catch(err)
 		{
@@ -112,25 +158,23 @@ Template.clipboard.events({
 			var message = 'successful';
 			if (!successful)
 				message = 'unsucessful';
-			console.log('Copying clipboard text was '+message);
+			console.log('main.js ~ Copying clipboard text was '+message);
 		}
 		catch(err)
 		{
 			console.log('Error: unable to copy');
 		}
-
 	},
 	'click .js-textareapastebtn'(event){
 		var paste_text = document.querySelector('textarea');
 		paste_text.select();
 		try
 		{
-			focus();
 			var successful = document.execCommand('paste');
 			var message = 'successful';
 			if (!successful)
 				message = 'unsucessful';
-			console.log('Pasting clipboard text was '+message);
+			console.log('main.js ~ Pasting clipboard text was '+message);
 		}
 		catch(err)
 		{
@@ -138,7 +182,11 @@ Template.clipboard.events({
 		}
 	},
 	'click .js-textareaclearbtn'(event){
-		$(".textarea").val("") ;
+		$(".textarea").val("");
+	},
+	'click .js-uichangebtn'(event)
+	{
+		ui_change();
 	},
 });
 
@@ -164,16 +212,15 @@ Template.updatedSpeechToTextControls.events({
 });
 
 Template.savedTextValue.events({
-    'click .delete'() {
-    	console.log('deleting' + this._id)
+  'click .delete_btn'(){
+    console.log('deleting' + this._id);
     SavedText.remove(this._id);
   },
-	'click .well'(){
-		console.log('paragraph clicked');
-		console.log(this['text']);
-		$(".textarea").val(this['text']);
-	},
-
+  'click .select_btn'(){
+    console.log('paragraph clicked');
+    console.log(this['text']);
+    $(".textarea").val(this['text']);
+  },
 });
 
 

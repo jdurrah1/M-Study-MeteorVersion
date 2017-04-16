@@ -29,9 +29,9 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Speech to Text</a></li>
+          <!--<li class="active"><a href="#">Speech to Text</a></li>
           <li><a href="http://www.zamzar.com/">File Conversions</a></li>
-          <li><a href="#">Saved Files</a></li>
+          <li><a href="#">Saved Files</a></li>-->
         </ul>
         <ul class="nav navbar-nav ">
           <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> {{> loginButtons}}</a></li>
@@ -45,8 +45,8 @@
       <div class="col-sm-8 text-center"> 
         {{>clipboard}}
       </div>
-      <div class="col-sm-4 sidenav" style="overflow-y: scroll;">
-        <h3>Saved Text</h3>
+      <div class="col-sm-4 sidenav" id="sidenav" style="overflow-y: scroll;">
+        <h3><strong>SAVED TEXT</strong></h3>
         {{#if currentUser}}
           {{>savedTextList}}
         {{else}}
@@ -60,35 +60,52 @@
 
 
 <template name="clipboard">
-  <h2><strong>Clipboard</strong></h2>
+  <h2><strong>CLIPBOARD</strong></h2>
     <div class="input-group">
-      <textarea class="form-control textarea" style="font-size: 30px;" rows="10" cols="100" id="clipBoard" name="text" align="middle"></textarea>
+      <textarea class="form-control textarea" style="font-size: 30px; font-family: 'Lucida Console';"
+	rows="10" cols="100" id="clipBoard" name="text" align="middle"></textarea>
       {{>updatedSpeechToTextControls}}
     </div>
   </template>
 
 
-
   <template name="updatedSpeechToTextControls">
 
         <!-- Standard Buttons -->
-        <button id="record" class="btn-standard btn-danger" onclick="toggleRecording(this);" name="image">Record</button>
+        <p><button id="record" class="btn-standard btn-danger" onclick="toggleRecording(this);" name="image">Record</button>
         <a  style="display:none" id="download_recording" ><button class="btn-standard" >Download </button> </a>
 
         <button type="button" class="btn-standard js-textareasavebtn">Save</button>
         <button type="button" class="btn-standard js-textareacutbtn">Cut</button>
         <button type="button" class="btn-standard js-textareacopybtn">Copy</button>
-        <button type="button" class="btn-standard js-textareapastebtn">Paste</button>
-        <button type="button" class="btn-standard js-textareaclearbtn">Clear</button><br>
+        <!--<button type="button" class="btn-standard js-textareapastebtn">Paste</button>-->
+        <button type="button" class="btn-standard js-textareaclearbtn">Clear</button>
 
         <!-- Download Buttons -->
-        <p>Download File:
-        <button type="button" class="btn-standard js-textareadownloadtxtbtn">Text</button>
-        <button type="button" class="btn-standard js-textareadownloaddocbtn">Doc</button></p>
+        Download File:
+        <button type="button" class="btn-standard js-textareadownloadtxtbtn">.TXT</button>
+        <button type="button" class="btn-standard js-textareadownloaddocbtn">.DOC</button></p>
 
         <!-- Upload Button -->
-        <input type="file" name="file" id="uploadtxt" class="inputfile">
-	      <button type="button" class="btn-standard js-textareauploadtxtbtn">Upload</button>
+	<p>Upload File:
+	<input type="file" name="file" id="uploadtxt" class="inputfile">
+	<button type="button" class="btn-standard js-textareauploadtxtbtn">Upload .TXT</button></p>
+
+	<!-- UI Options -->
+	<p><strong>Change Appearance:</strong></p>
+	<p>
+	Page BG<input type="color" id="color_page_bg" value="#000000">
+	Page Text<input type="color" id="color_page_text" value="#ffff00">
+	Buttons BG<input type="color" id="color_btn_bg" value="#ff0000">
+	Buttons Text<input type="color" id="color_btn_text" value="#ffffff">
+	</p>
+	<p>
+	Clipboard BG<input type="color" id="color_clip_bg" value="#006600">
+	Clipboard Text<input type="color" id="color_clip_text" value="#00ff00">
+	Docs BG<input type="color" id="color_docs_bg" value="#0000ff">
+	Docs Text<input type="color" id="color_docs_text" value="#00ffff">
+	<button type="button" class="btn-standard js-uichangebtn">Apply Changes</button>
+	</p>
 
       <script src = "../static/js/record.js"></script>
       <script src="../static/js/Recorderjs-master/dist/recorder.js"></script>
@@ -104,6 +121,9 @@
 
   <template name="savedTextValue">
     <li>
-      <div class="well"><button class="delete">&times;</button>{{text}}</div>
+      <div>
+        <button class="select_btn">&lt;&lt;</button>
+        <button class="delete_btn"><strong>&times;</strong></button>{{text}}
+      </div>
     </li>
   </template>

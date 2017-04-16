@@ -71,23 +71,34 @@
   <template name="updatedSpeechToTextControls">
 
         <!-- Standard Buttons -->
-        <button id="record" class="btn-standard btn-danger" onclick="toggleRecording(this);" name="image">Record</button>
+        <p><button id="record" class="btn-standard btn-danger" onclick="toggleRecording(this);" name="image">Record</button>
         <a  style="display:none" id="download_recording" ><button class="btn-standard" >Download </button> </a>
 
         <button type="button" class="btn-standard js-textareasavebtn">Save</button>
         <button type="button" class="btn-standard js-textareacutbtn">Cut</button>
         <button type="button" class="btn-standard js-textareacopybtn">Copy</button>
-        <button type="button" class="btn-standard js-textareapastebtn">Paste</button>
-        <button type="button" class="btn-standard js-textareaclearbtn">Clear</button><br>
+        <!--<button type="button" class="btn-standard js-textareapastebtn">Paste</button>-->
+        <button type="button" class="btn-standard js-textareaclearbtn">Clear</button>
 
         <!-- Download Buttons -->
-        <p>Download File:
-        <button type="button" class="btn-standard js-textareadownloadtxtbtn">Text</button>
-        <button type="button" class="btn-standard js-textareadownloaddocbtn">Doc</button></p>
+        Download File:
+        <button type="button" class="btn-standard js-textareadownloadtxtbtn">.TXT</button>
+        <button type="button" class="btn-standard js-textareadownloaddocbtn">.DOC</button></p>
 
         <!-- Upload Button -->
-        <input type="file" name="file" id="uploadtxt" class="inputfile">
-	      <button type="button" class="btn-standard js-textareauploadtxtbtn">Upload</button>
+	<p>Upload File:
+	<input type="file" name="file" id="uploadtxt" class="inputfile">
+	<button type="button" class="btn-standard js-textareauploadtxtbtn">Upload .TXT</button></p>
+
+	<!-- UI Options -->
+	<p>Change Appearance:</p>
+	<p>
+	Page BG<input type="color" id="color_page_bg" value="#ffffff">
+	Page Text<input type="color" id="color_page_text" value="#000000">
+	Buttons BG<input type="color" id="color_btn_bg" value="#dddddd">
+	Buttons Text<input type="color" id="color_btn_text" value="#000000">
+	<button type="button" class="btn-standard js-uichangebtn">Apply Changes</button>
+	</p>
 
       <script src = "../static/js/record.js"></script>
       <script src="../static/js/Recorderjs-master/dist/recorder.js"></script>

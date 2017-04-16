@@ -9,7 +9,7 @@ cut_button.addEventListener('click', function(event)
 		var message = 'successful';
 		if (!successful)
 			message = 'unsucessful';
-		console.log('Cutting clipboard text was '+message);
+		console.log('cut-copy-paste.js ~ Cutting clipboard text was '+message);
 	}
 	catch(err)
 	{
@@ -28,7 +28,7 @@ copy_button.addEventListener('click', function(event)
 		var message = 'successful';
 		if (!successful)
 			message = 'unsucessful';
-		console.log('Copying clipboard text was '+message);
+		console.log('cut-copy-paste.js ~ Copying clipboard text was '+message);
 	}
 	catch(err)
 	{
@@ -43,12 +43,11 @@ paste_button.addEventListener('click', function(event)
 	paste_text.select();
 	try
 	{
-		focus();
 		var successful = document.execCommand('paste');
 		var message = 'successful';
 		if (!successful)
 			message = 'unsucessful';
-		console.log('Pasting clipboard text was '+message);
+		console.log('cut-copy-paste.js ~ Pasting clipboard text was '+message);
 	}
 	catch(err)
 	{

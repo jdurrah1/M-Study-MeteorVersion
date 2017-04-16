@@ -37,7 +37,7 @@ Template.clipboard.events({
 		console.log('now trying to download as .txt');
 		console.log('grabbing clipboard contents');
 		var elHtml = $(".textarea").val()
-		var filename = elHtml.substring(0,16);+'.txt';
+		var filename = elHtml.substring(0,16)+'.txt';
 		var link = document.createElement('a');
 		mimeType = 'text/plain';
 		link.setAttribute('download', filename);
@@ -48,7 +48,7 @@ Template.clipboard.events({
 		console.log('now trying to download as .doc');
 		console.log('grabbing clipboard contents');
 		var elHtml = $(".textarea").val()
-		var filename = elHtml.substring(0,16);+'.doc';
+		var filename = elHtml.substring(0,16)+'.doc';
 		var link = document.createElement('a');
 		mimeType = 'application/msword';
 		link.setAttribute('download', filename);
@@ -96,7 +96,7 @@ Template.clipboard.events({
 			var message = 'successful';
 			if (!successful)
 				message = 'unsucessful';
-			console.log('Cutting clipboard text was '+message);
+			console.log('main.js ~ Cutting clipboard text was '+message);
 		}
 		catch(err)
 		{
@@ -112,25 +112,23 @@ Template.clipboard.events({
 			var message = 'successful';
 			if (!successful)
 				message = 'unsucessful';
-			console.log('Copying clipboard text was '+message);
+			console.log('main.js ~ Copying clipboard text was '+message);
 		}
 		catch(err)
 		{
 			console.log('Error: unable to copy');
 		}
-
 	},
 	'click .js-textareapastebtn'(event){
 		var paste_text = document.querySelector('textarea');
 		paste_text.select();
 		try
 		{
-			focus();
 			var successful = document.execCommand('paste');
 			var message = 'successful';
 			if (!successful)
 				message = 'unsucessful';
-			console.log('Pasting clipboard text was '+message);
+			console.log('main.js ~ Pasting clipboard text was '+message);
 		}
 		catch(err)
 		{
@@ -138,7 +136,20 @@ Template.clipboard.events({
 		}
 	},
 	'click .js-textareaclearbtn'(event){
-		$(".textarea").val("") ;
+		$(".textarea").val("");
+	},
+	'click .js-uichangebtn'(event){
+		console.log('main.js ~ Changing page bg color to '+document.getElementById('color_page_bg').value);
+		console.log('main.js ~ Changing page text color to '+document.getElementById('color_page_text').value);
+		console.log('main.js ~ Changing button bg color to '+document.getElementById('color_btn_bg').value);
+		console.log('main.js ~ Changing button text color to '+document.getElementById('color_btn_text').value);
+		document.body.style.backgroundColor = document.getElementById('color_page_bg').value;
+		document.body.style.color = document.getElementById('color_page_text').value;
+		for (var i=0; i<document.getElementsByTagName("button").length; i+=1)
+		{
+		  document.getElementsByTagName("button")[i].style.backgroundColor = document.getElementById('color_btn_bg').value;
+		  document.getElementsByTagName("button")[i].style.color = document.getElementById('color_btn_text').value;
+		}
 	},
 });
 

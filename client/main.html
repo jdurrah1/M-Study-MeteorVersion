@@ -87,10 +87,11 @@
         <button type="button" class="btn-standard js-textareadownloaddocbtn">.DOC</button></p>
 
         <!-- Upload Button -->
-	<p>Upload File:
+	<!--<p>Upload File:
 	<input type="file" name="file" id="uploadtxt" class="inputfile">
 	<button type="button" class="btn-standard js-textareauploadtxtbtn">Upload .TXT</button></p>
-
+-->
+  {{>flac}}
 	<!-- UI Options -->
 	<p><strong>Change Appearance:</strong></p>
 	<p>
@@ -127,3 +128,147 @@
       </div>
     </li>
   </template>
+
+
+<template name="flac">
+  <div id="body-content">
+
+    <input id="com-file-analyzer-fileinput" autofocus="" type="file" />
+    <progress style="display: inline-block; text-align: center; width: 100%;" value="0" max="100">Your browser does not support this tool. Upgrade to a modern browser, please.</progress>
+
+    <script type='text/javascript'>
+      speechName = "";
+      var $prog = $('progress'),
+        $console = $('#console'),
+        $input = $('input'),
+        // Create a new web worker
+        // note that for each file you're going to encode
+        // you'll need to create a new web worker even
+        // if the previous one already finished
+        // This is because the "runtime" is shut down by
+        // Emscripten after one file was encoded
+        worker = new Worker('../flac.js/worker/EmsWorkerProxy.js');
+
+      // $input is a file input
+      // when its value changed, the user most likely
+      // inserted a file
+      $input.change(function() {
+        // Get the file supplied by the user
+        // and create a FileReader to get its
+        // contents as ArrayBuffer
+        var f = this.files[0],
+          fr = new FileReader();
+
+        // Disable input to prevent the user
+        // from inserting another file
+        $input.attr('disabled', 'disabled');
+
+        // Add an event listener to the file reader
+        // so we know when it's done with the whole file
+        fr.addEventListener('loadend', function() {
+          var encodedName = f.name.replace(/\.[^\.]+$/, '.flac');
+
+          // Command line arguments
+          // These are strings such as
+          // options, input file and output file
+          var args = [
+            // Input file *name*
+            f.name
+          ];
+          // Input file data
+          // Object literal mapping
+          // file names to Uint8Array
+          var inData = {};
+          // Remember: We set f.name as input file name
+          inData[f.name] = new Uint8Array(fr.result);
+
+          // Meta-information about the files
+          // that are being created during encoding
+          // Currently MIME type only
+          var outData = {};
+          outData[encodedName] = {
+            // Its MIME type
+            'MIME': 'audio/flac'
+          };
+
+          // Finally post all the data to the
+          // worker together with the "encode"
+          // command.
+          worker.postMessage({
+            command: 'encode',
+            args: args,
+            outData: outData,
+            fileData: inData
+          });
+        });
+
+        // Read the file as ArrayBuffer
+        // The FileReader will fire the `loadend`
+        // event upon completion.
+        fr.readAsArrayBuffer(f);
+      });
+
+      // Listen for messages by the worker
+      worker.onmessage = function(e) {
+        // If the message is a progress message
+        if (e.data && e.data.reply === 'progress') {
+          vals = e.data.values;
+          if (vals[1]) {
+            // ... push the progress bar forward
+            $prog.val(vals[0] / vals[1] * 100);
+          }
+        // If the worker is ready
+        } else if (e.data && e.data.reply === 'done') {
+          $prog.val(100);
+          for (fileName in e.data.values) {
+            // ... offer all files the worker returned
+            // In this case it's only one because we didn't
+            // use a command line argument that would force
+            // flac.js to create another file
+              console.log(e.data.values[fileName].blob);
+              blobToBase64(e.data.values[fileName].blob); 
+
+          }
+        }
+      };
+
+     function blobToBase64(blob) {
+        var reader = new FileReader();
+        reader.onload = function() {
+          var dataUrl = reader.result;
+          var base64 = dataUrl.split(',')[1];
+          sendpost(base64);
+        };
+        reader.readAsDataURL(blob);
+      };
+
+      function sendpost(base64)
+      {
+
+        console.log("sending post");
+        var name = HTTP.call("POST", "https://speech.googleapis.com/v1beta1/speech:syncrecognize?key=AIzaSyAO2eO6JVR93eNL1WYpr040o7kFQ59XPbM",
+          {data: {
+            "config": {
+                "encoding":"FLAC",
+                "language_code": "en-US",
+                "sampleRate": 44100
+            },
+            "audio": {
+                "content":base64
+            }
+          }}, 
+          function(error, result){
+
+            var textAreaVal = JSON.parse(result.content).results[0].alternatives[0].transcript
+            $(".textarea").val(textAreaVal);
+
+            console.log(result);
+            newResults = result; 
+          }
+          );
+        return name; 
+      }
+    </script>
+  </div>
+</template>
+

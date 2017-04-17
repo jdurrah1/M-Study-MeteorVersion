@@ -87,26 +87,29 @@
         <button type="button" class="btn-standard js-textareadownloaddocbtn">.DOC</button></p>
 
         <!-- Upload Button -->
-	<!--<p>Upload File:
+	<p>Upload File:
 	<input type="file" name="file" id="uploadtxt" class="inputfile">
 	<button type="button" class="btn-standard js-textareauploadtxtbtn">Upload .TXT</button></p>
--->
-  {{>flac}}
+
+        {{>flac}}
+
 	<!-- UI Options -->
-	<p><strong>Change Appearance:</strong></p>
-	<p>
-	Page BG<input type="color" id="color_page_bg" value="#000000">
-	Page Text<input type="color" id="color_page_text" value="#ffff00">
-	Buttons BG<input type="color" id="color_btn_bg" value="#ff0000">
-	Buttons Text<input type="color" id="color_btn_text" value="#ffffff">
-	</p>
-	<p>
-	Clipboard BG<input type="color" id="color_clip_bg" value="#006600">
-	Clipboard Text<input type="color" id="color_clip_text" value="#00ff00">
-	Docs BG<input type="color" id="color_docs_bg" value="#0000ff">
-	Docs Text<input type="color" id="color_docs_text" value="#00ffff">
-	<button type="button" class="btn-standard js-uichangebtn">Apply Changes</button>
-	</p>
+	<p><button type="button" class="btn-standard js-uishowbtn">Show Appearance Options</button></p>
+	<div id="appearance_options">
+	  <p>
+	    Page BG<input type="color" id="color_page_bg" value="#000000">
+	    Page Text<input type="color" id="color_page_text" value="#ffff00">
+	    Buttons BG<input type="color" id="color_btn_bg" value="#ff0000">
+	    Buttons Text<input type="color" id="color_btn_text" value="#ffffff">
+	  </p>
+	  <p>
+	    Clipboard BG<input type="color" id="color_clip_bg" value="#006600">
+	    Clipboard Text<input type="color" id="color_clip_text" value="#00ff00">
+	    Docs BG<input type="color" id="color_docs_bg" value="#0000ff">
+	    Docs Text<input type="color" id="color_docs_text" value="#00ffff">
+	    <button type="button" class="btn-standard js-uichangebtn">Apply Changes</button>
+	  </p>
+        </div>
 
       <script src = "../static/js/record.js"></script>
       <script src="../static/js/Recorderjs-master/dist/recorder.js"></script>

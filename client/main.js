@@ -10,6 +10,8 @@ SavedText = new Mongo.Collection('SavedText');
 
 
 document.addEventListener("DOMContentLoaded", function() {
+  var ui_div = document.getElementById('appearance_options');
+  ui_div.style.display = 'none';
   ui_change();
 });
 
@@ -183,6 +185,14 @@ Template.clipboard.events({
 	},
 	'click .js-textareaclearbtn'(event){
 		$(".textarea").val("");
+	},
+	'click .js-uishowbtn'(event){
+		console.log('Show/hide appearance options');
+		var ui_div = document.getElementById('appearance_options');
+		if (ui_div.style.display === 'none')
+			ui_div.style.display = 'block';
+		else
+			ui_div.style.display = 'none';
 	},
 	'click .js-uichangebtn'(event)
 	{
